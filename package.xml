@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>person_detection_pcl</name>
+  <name>pcl_person_detection</name>
   <version>0.0.0</version>
   <description>The pcl_person_detection package</description>
 

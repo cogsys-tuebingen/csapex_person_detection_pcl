@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(person_detection_pcl)
+project(pcl_person_detection)
 
 find_package(catkin REQUIRED
     COMPONENTS
@@ -29,9 +29,6 @@ find_package(PCL REQUIRED COMPONENTS common io people filter)
 catkin_package(
     INCLUDE_DIRS
         include
-    LIBRARIES
-        person_detection_pcl_node
-        person_detection_pcl_backport
 )
 
 ###########
@@ -44,15 +41,15 @@ include_directories(
     SYSTEM ${PCL_INCLUDE_DIRS}
 )
 
-add_library(person_detection_pcl_backport
+add_library(${PROJECT_NAME}_backport
     src/pcl_backport/hog.cpp
 )
 
-target_link_libraries(person_detection_pcl_backport
+target_link_libraries(${PROJECT_NAME}_backport
     ${PCL_LIBRARIES}
 )
 
-add_custom_target(person_detection_pcl_backport_qt_show_sources SOURCES
+add_custom_target(${PROJECT_NAME}_backport_qt_show_sources SOURCES
     include/person_detection_pcl/impl/ground_based_people_detection_app.hpp
     include/person_detection_pcl/impl/head_based_subcluster.hpp
     include/person_detection_pcl/impl/height_map_2d.hpp
@@ -77,14 +74,14 @@ file(GLOB sources
     src/csapex/pcl_hog_extractor.cpp
 )
 
-add_library(person_detection_pcl_node
+add_library(${PROJECT_NAME}_apex_node
     ${sources}
 )
 
-target_link_libraries(person_detection_pcl_node
+target_link_libraries(${PROJECT_NAME}_apex_node
     ${catkin_LIBRARIES}
     ${PCL_LIBRARIES}
-    person_detection_pcl_backport
+    ${PROJECT_NAME}_backport
 )
 
 #############
@@ -94,11 +91,11 @@ target_link_libraries(person_detection_pcl_node
 install(FILES plugins.xml
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
-install(TARGETS person_detection_pcl_backport
+install(TARGETS ${PROJECT_NAME}_backport
         ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
-install(TARGETS person_detection_pcl_node
+install(TARGETS ${PROJECT_NAME}_apex_node
         ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})

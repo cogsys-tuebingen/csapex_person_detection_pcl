@@ -284,7 +284,6 @@ void PCLPersonDetector::process(cloud_t::Ptr cloud)
         }
         else
         {
-//            detector_.setTransformation(Eigen::Matrix3f::Identity());
             detector_.reset_transformation();
         }
 
@@ -357,21 +356,15 @@ void PCLPersonDetector::process(cloud_t::Ptr cloud)
             RoiMessage roi;
             if (!readParameter<bool>("camera/sensor_potrait_orientation"))
             {
-//                roi.value.setH(cluster.projected_bottom_[1] - cluster.projected_top_[1]);
-//                roi.value.setW(roi.value.h() / 2);
-//                roi.value.setX(cluster.projected_center_[0] - roi.value.w() / 2);
-//                roi.value.setY(cluster.projected_center_[1] - roi.value.h() / 2);
                 float pixel_height;
-                float pixel_width;
+//                float pixel_width;
 
                 pixel_height = cluster.projected_bottom_(1) - cluster.projected_top_(1);
-                pixel_width = pixel_height / 2.0f;
+//                pixel_width = pixel_height / 2.0f;
 
                 float pixel_xc = cluster.projected_center_(0);
                 float pixel_yc = cluster.projected_center_(1);
 
-//                int height = floor((pixel_height * 128) / (0.75 * 128) + 0.5);  // floor(i+0.5) = round(i)
-//                int width = floor((pixel_height * 64) / (0.75 * 128) + 0.5);
                 int height = pixel_height;
                 int width = pixel_height / 2;
                 int xmin = floor(pixel_xc - width / 2 + 0.5);
@@ -384,16 +377,11 @@ void PCLPersonDetector::process(cloud_t::Ptr cloud)
             }
             else
             {
-//                roi.value.setW(cluster.projected_bottom_[0] - cluster.projected_top_[0]);
-//                roi.value.setH(roi.value.w() / 2);
-//                roi.value.setX(cluster.projected_center_[1] - roi.value.h() / 2);
-//                roi.value.setY(cloud->height - cluster.projected_center_[0] + 1 - roi.value.w() / 2);
-
-                float pixel_height;
+//                float pixel_height;
                 float pixel_width;
 
                 pixel_width = cluster.projected_top_(0) - cluster.projected_bottom_(1);
-                pixel_height = pixel_width / 2.0f;
+//                pixel_height = pixel_width / 2.0f;
 
                 float p_pixel_xc = cluster.projected_center_(0);
                 float p_pixel_yc = cluster.projected_center_(1);
@@ -401,8 +389,6 @@ void PCLPersonDetector::process(cloud_t::Ptr cloud)
                 float pixel_xc = p_pixel_yc;
                 float pixel_yc = 640 - p_pixel_xc + 1;
 
-//                int height = floor((pixel_height * 128) / (0.75 * 128) + 0.5);  // floor(i+0.5) = round(i)
-//                int width = floor((pixel_height * 64) / (0.75 * 128) + 0.5);
                 int height = pixel_width;
                 int width = pixel_width / 2;
                 int xmin = floor(pixel_xc - width / 2 + 0.5);
@@ -413,13 +399,6 @@ void PCLPersonDetector::process(cloud_t::Ptr cloud)
                 roi.value.setW(width);
                 roi.value.setH(height);
             }
-
-            /*
-            roi.value.setX(cluster.projected_top_[0]);
-            roi.value.setY(cluster.projected_top_[1]);
-            roi.value.setW(cluster.projected_bottom_[0] - cluster.projected_top_[0] + 10);
-            roi.value.setH(cluster.projected_bottom_[1] - cluster.projected_top_[1] + 10);
-            */
 
             msg_clusters->push_back(cluster.getIndices());
             msg_rois->push_back(roi);
