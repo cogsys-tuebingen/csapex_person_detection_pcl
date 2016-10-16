@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>pcl_person_detection</name>
+  <name>csapex_pcl_person_detection</name>
   <version>0.0.0</version>
   <description>The pcl_person_detection package</description>
 
