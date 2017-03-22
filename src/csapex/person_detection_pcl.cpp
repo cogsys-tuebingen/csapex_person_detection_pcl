@@ -9,7 +9,7 @@
 #include <csapex/profiling//timer.h>
 #include <csapex/profiling/interlude.hpp>
 
-#include <csapex_point_cloud/indeces_message.h>
+#include <csapex_point_cloud/msg/indeces_message.h>
 #include <csapex/msg/generic_vector_message.hpp>
 #include <csapex_transform/transform_message.h>
 #include <csapex_opencv/cv_mat_message.h>
