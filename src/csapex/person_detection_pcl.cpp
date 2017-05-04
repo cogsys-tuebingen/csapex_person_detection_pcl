@@ -6,10 +6,10 @@
 #include <csapex/model/node_modifier.h>
 #include <csapex/param/parameter_factory.h>
 #include <csapex/utility/register_apex_plugin.h>
-#include <csapex/profiling//timer.h>
+#include <csapex/profiling/timer.h>
 #include <csapex/profiling/interlude.hpp>
 
-#include <csapex_point_cloud/indeces_message.h>
+#include <csapex_point_cloud/msg/indeces_message.h>
 #include <csapex/msg/generic_vector_message.hpp>
 #include <csapex_transform/transform_message.h>
 #include <csapex_opencv/cv_mat_message.h>
@@ -407,7 +407,7 @@ void PCLPersonDetector::process(cloud_t::Ptr cloud)
         msg::publish<GenericVectorMessage, pcl::PointIndices>(out_clusters_unclassified_, msg_clusters);
         msg::publish<GenericVectorMessage, RoiMessage>(out_rois_unclassified_, msg_rois);
 
-        CvMatMessage::Ptr msg_image = std::make_shared<CvMatMessage>(enc::bgr, cloud->header.stamp);
+        CvMatMessage::Ptr msg_image = std::make_shared<CvMatMessage>(enc::bgr, cloud->header.frame_id, cloud->header.stamp);
         const pcl::PointCloud<pcl::RGB>& src = detector_.rgb_image();
         msg_image->value = cv::Mat(src.height, src.width, CV_8UC3);
         for (int y = 0; y < src.height; ++y)

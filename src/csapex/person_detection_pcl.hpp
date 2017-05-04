@@ -1,7 +1,7 @@
 #pragma once
 
 #include <csapex/model/node.h>
-#include <csapex_point_cloud/point_cloud_message.h>
+#include <csapex_point_cloud/msg/point_cloud_message.h>
 
 //#include <person_detection_pcl/ground_based_people_detection_app.h>
 #include "../../include/person_detection_pcl/ground_based_people_detection_app.h"

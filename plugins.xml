@@ -1,14 +1,14 @@
-<library path="libperson_detection_pcl_node">
+<library path="libpcl_person_detection_apex_node">
     <class type="person_detection::PCLPersonDetector" base_class_type="csapex::Node">
-      <description>PCL person detection implementation from Munaro et. al.</description>
-      <tags>person_detection</tags>
+      <description>PCL People Detection implementation from Munaro et. al.</description>
+      <tags>PCL, Person Detection</tags>
     </class>
     <class type="person_detection::GroundPlaneEstimation" base_class_type="csapex::Node">
       <description>Estimates a ground plane.</description>
-      <tags>person_detection</tags>
+      <tags>PCL, Person Detection</tags>
     </class>
     <class type="person_detection::PCLHOGExtractor" base_class_type="csapex::Node">
-      <description>Calculates HOG features using the HOG extractor from the PCL.</description>
-      <tags>person_detection</tags>
+      <description>Calculates HOG features using the HOG extractor from the PCL People Detector.</description>
+      <tags>PCL, Person Detection</tags>
     </class>
 </library>
