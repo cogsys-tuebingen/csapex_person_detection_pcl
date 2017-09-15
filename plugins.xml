@@ -1,4 +1,4 @@
-<library path="libpcl_person_detection_apex_node">
+<library path="libcsapex_pcl_person_detection_apex_node">
     <class type="person_detection::PCLPersonDetector" base_class_type="csapex::Node">
       <description>PCL People Detection implementation from Munaro et. al.</description>
       <tags>PCL, Person Detection</tags>
