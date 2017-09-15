@@ -410,8 +410,8 @@ void PCLPersonDetector::process(cloud_t::Ptr cloud)
         CvMatMessage::Ptr msg_image = std::make_shared<CvMatMessage>(enc::bgr, cloud->header.frame_id, cloud->header.stamp);
         const pcl::PointCloud<pcl::RGB>& src = detector_.rgb_image();
         msg_image->value = cv::Mat(src.height, src.width, CV_8UC3);
-        for (int y = 0; y < src.height; ++y)
-            for (int x = 0; x < src.width; ++x)
+        for (unsigned int y = 0; y < src.height; ++y)
+            for (unsigned int x = 0; x < src.width; ++x)
             {
                 const pcl::RGB& from = src.at(x, y);
                 cv::Vec3b& to = msg_image->value.at<cv::Vec3b>(y, x);
